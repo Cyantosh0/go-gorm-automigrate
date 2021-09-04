@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 
 	"github.com/Cyantosh0/go-gorm-automigrate/config"
+	"github.com/Cyantosh0/go-gorm-automigrate/migration"
 )
 
 func main() {
@@ -17,5 +18,8 @@ func main() {
 	}
 
 	fmt.Println("- - - Connecting to Databse - - -")
-	config.DB = config.SetupDatabase()
+	db := config.SetupDatabase()
+
+	fmt.Println("- - - Running Migration - - -")
+	migration.Migrate(db)
 }
