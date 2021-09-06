@@ -7,8 +7,12 @@ import (
 )
 
 func Migrate(db *gorm.DB) {
-	db.AutoMigrate(models.Users{}, models.UserSettings{}, models.Organizations{})
+	db.AutoMigrate(
+		models.Users{},
+		models.UserSettings{},
+		models.Organizations{},
+	)
 
-	// UsersSettings foreign keys
+	// UsersSettings: Add foreign keys
 	db.Model(&models.UserSettings{}).AddForeignKey("user_id", "users(id)", "CASCADE", "CASCADE")
 }
