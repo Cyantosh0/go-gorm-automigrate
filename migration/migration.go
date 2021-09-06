@@ -18,4 +18,7 @@ func Migrate(db *gorm.DB) {
 
 	// Users: Drop 'language' column
 	db.Model(&models.Users{}).DropColumn("language")
+
+	// UsersSettings: Change size from 255 to 200
+	db.Model(&models.UserSettings{}).ModifyColumn("value", "varchar(200)")
 }
