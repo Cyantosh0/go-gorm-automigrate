@@ -15,4 +15,7 @@ func Migrate(db *gorm.DB) {
 
 	// UsersSettings: Add foreign keys
 	db.Model(&models.UserSettings{}).AddForeignKey("user_id", "users(id)", "CASCADE", "CASCADE")
+
+	// Users: Drop 'language' column
+	db.Model(&models.Users{}).DropColumn("language")
 }
