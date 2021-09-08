@@ -10,7 +10,7 @@ func Migrate(db *gorm.DB) {
 	db.AutoMigrate(
 		models.Users{},
 		models.UserSettings{},
-		models.Organizations{},
+		// models.Organizations{},
 	)
 
 	// UsersSettings: Add foreign keys
@@ -21,4 +21,6 @@ func Migrate(db *gorm.DB) {
 
 	// UsersSettings: Change size from 255 to 200
 	db.Model(&models.UserSettings{}).ModifyColumn("value", "varchar(200)")
+
+	db.DropTable(&models.Organizations{}) // Optional: db.DropTable("organizations")
 }
